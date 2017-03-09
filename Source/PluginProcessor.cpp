@@ -125,6 +125,7 @@ void EffectTestAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuff
 {
     const int totalNumInputChannels  = getTotalNumInputChannels();
     const int totalNumOutputChannels = getTotalNumOutputChannels();
+    
 
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
@@ -134,15 +135,37 @@ void EffectTestAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuff
     // this code if your algorithm always overwrites all the output channels.
     for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
+    
+    
+    //MY CODE declare float variables x and y
+    float y = 0.f;
+    float x = 0.f;
+    
+    //MY CODE the below 'for' loop should be used in ALL code and loops between processing the
+    //left and right channels (L = 0, R = 1)
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
+        //MY CODE each channelData points to a memory array of 'channel' ie. 0 or 1 (L or R)
         float* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        
+        //MY CODE this for loop loops through the samples in each array (array 0 or 1)
+        for(int i = 0; i < buffer.getNumSamples(); i++){
+            
+            //MY CODE x = channelData array
+            x = channelData[i]; //* 2.0f;  this can be added as gain stage
+            
+            //MY CODE distortion code
+            if (x > 0.0f)
+                y = 1.0f - expf(-x);
+            else y = -1.0f + expf(x);
+            
+            //MY CODE new array = result of distortion code
+            channelData[i] = y;
+                
+        }
+     
     }
+    
 }
 
 //==============================================================================
