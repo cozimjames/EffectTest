@@ -148,7 +148,8 @@ void EffectTestAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuff
         //MY CODE each channelData points to a memory array of 'channel' ie. 0 or 1 (L or R)
         float* channelData = buffer.getWritePointer (channel);
         
-        //MY CODE this for loop loops through the samples in each array (array 0 or 1)
+        //MY CODE this 'for loop' loops through the samples in one array (array 0 or 1)
+        //before returning to the main loop to process the other side
         for(int i = 0; i < buffer.getNumSamples(); i++){
             
             //MY CODE x = channelData array
