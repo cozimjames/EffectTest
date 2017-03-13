@@ -61,7 +61,7 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<Slider> gainLevel;
+    ScopedPointer<Slider> gainLevelPosition;
 
 
     //==============================================================================

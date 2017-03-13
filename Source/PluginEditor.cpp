@@ -33,11 +33,11 @@ EffectTestAudioProcessorEditor::EffectTestAudioProcessorEditor (EffectTestAudioP
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    addAndMakeVisible (gainLevel = new Slider ("new slider"));
-    gainLevel->setRange (0, 100, 0);
-    gainLevel->setSliderStyle (Slider::Rotary);
-    gainLevel->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
-    gainLevel->addListener (this);
+    addAndMakeVisible (gainLevelPosition = new Slider ("Gain"));
+    gainLevelPosition->setRange (1, 40, 0);
+    gainLevelPosition->setSliderStyle (Slider::Rotary);
+    gainLevelPosition->setTextBoxStyle (Slider::TextBoxBelow, false, 30, 20);
+    gainLevelPosition->addListener (this);
 
 
     //[UserPreSize]
@@ -56,7 +56,7 @@ EffectTestAudioProcessorEditor::~EffectTestAudioProcessorEditor()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    gainLevel = nullptr;
+    gainLevelPosition = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -80,7 +80,7 @@ void EffectTestAudioProcessorEditor::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    gainLevel->setBounds (24, 24, 71, 80);
+    gainLevelPosition->setBounds (24, 24, 72, 80);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -90,11 +90,11 @@ void EffectTestAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMo
     //[UsersliderValueChanged_Pre]
     //[/UsersliderValueChanged_Pre]
 
-    if (sliderThatWasMoved == gainLevel)
+    if (sliderThatWasMoved == gainLevelPosition)
     {
-        //[UserSliderCode_gainLevel] -- add your slider handling code here..
+        //[UserSliderCode_gainLevelPosition] -- add your slider handling code here..
         processor.gainLevel = gainLevelPosition->getValue();
-        //[/UserSliderCode_gainLevel]
+        //[/UserSliderCode_gainLevelPosition]
     }
 
     //[UsersliderValueChanged_Post]
@@ -127,10 +127,10 @@ BEGIN_JUCER_METADATA
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="600" initialHeight="400">
   <BACKGROUND backgroundColour="ffffffff"/>
-  <SLIDER name="new slider" id="30c79e76befdbc90" memberName="gainLevel"
-          virtualName="" explicitFocusOrder="0" pos="24 24 71 80" min="0"
-          max="100" int="0" style="Rotary" textBoxPos="TextBoxBelow" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
+  <SLIDER name="Gain" id="30c79e76befdbc90" memberName="gainLevelPosition"
+          virtualName="" explicitFocusOrder="0" pos="24 24 72 80" min="1"
+          max="40" int="0" style="Rotary" textBoxPos="TextBoxBelow" textBoxEditable="1"
+          textBoxWidth="30" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

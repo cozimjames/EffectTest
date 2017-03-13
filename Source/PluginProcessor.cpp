@@ -152,16 +152,16 @@ void EffectTestAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuff
         //--- before returning to the main loop to process the other side
         for(int i = 0; i < buffer.getNumSamples(); i++){
             
-            //--- x = channelData array
-            x = channelData[i]; //* 2.0f;  this can be added as gain stage to increase the effect
+            //--- x = channelData array * gain
+            x = channelData[i] * gainLevel;
             
             //--- distortion code
             if (x > 0.0f)
                 y = 1.0f - expf(-x);
             else y = -1.0f + expf(x);
             
-            //--- new array = result of distortion code
-            channelData[i] = y;
+            //--- new array(ooutput) = result of distortion code * 0.95 (to limit)
+            channelData[i] = y * 0.95f;
                 
         }
      
