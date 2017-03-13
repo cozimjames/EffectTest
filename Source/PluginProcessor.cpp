@@ -137,30 +137,30 @@ void EffectTestAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuff
         buffer.clear (i, 0, buffer.getNumSamples());
     
     
-    //MY CODE declare float variables x and y
+    //--- declare float variables x and y
     float y = 0.f;
     float x = 0.f;
     
-    //MY CODE the below 'for' loop should be used in ALL code and loops between processing the
-    //left and right channels (L = 0, R = 1)
+    //--- the below 'for' loop should be used in ALL code and loops between processing the
+    //--- left and right channels of each sample (L = 0, R = 1)
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        //MY CODE each channelData points to a memory array of 'channel' ie. 0 or 1 (L or R)
+        //--- channelData points to a memory array for the 'channel' being processed ie. 0 or 1 (L or R)
         float* channelData = buffer.getWritePointer (channel);
         
-        //MY CODE this 'for loop' loops through the samples in one array (array 0 or 1)
-        //before returning to the main loop to process the other side
+        //--- this 'for' loop, loops through the samples in the array (array 0 or 1)
+        //--- before returning to the main loop to process the other side
         for(int i = 0; i < buffer.getNumSamples(); i++){
             
-            //MY CODE x = channelData array
-            x = channelData[i]; //* 2.0f;  this can be added as gain stage
+            //--- x = channelData array
+            x = channelData[i]; //* 2.0f;  this can be added as gain stage to increase the effect
             
-            //MY CODE distortion code
+            //--- distortion code
             if (x > 0.0f)
                 y = 1.0f - expf(-x);
             else y = -1.0f + expf(x);
             
-            //MY CODE new array = result of distortion code
+            //--- new array = result of distortion code
             channelData[i] = y;
                 
         }

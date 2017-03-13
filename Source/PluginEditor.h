@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 4.3.0
+  Created with Projucer version: 4.3.1
 
   ------------------------------------------------------------------------------
 
@@ -17,8 +17,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCE_HEADER_E381F33C12CAF11D__
-#define __JUCE_HEADER_E381F33C12CAF11D__
+#ifndef __JUCE_HEADER_567AA9F0781E1874__
+#define __JUCE_HEADER_567AA9F0781E1874__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -36,7 +36,8 @@
                                                                     //[/Comments]
 */
 class EffectTestAudioProcessorEditor  : public AudioProcessorEditor,
-                                           public Timer
+                                        public Timer,
+                                        public SliderListener
 {
 public:
     //==============================================================================
@@ -50,6 +51,7 @@ public:
 
     void paint (Graphics& g) override;
     void resized() override;
+    void sliderValueChanged (Slider* sliderThatWasMoved) override;
 
 
 
@@ -59,6 +61,7 @@ private:
     //[/UserVariables]
 
     //==============================================================================
+    ScopedPointer<Slider> gainLevel;
 
 
     //==============================================================================
@@ -68,4 +71,4 @@ private:
 //[EndFile] You can add extra defines here...
 //[/EndFile]
 
-#endif   // __JUCE_HEADER_E381F33C12CAF11D__
+#endif   // __JUCE_HEADER_567AA9F0781E1874__
